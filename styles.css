@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.content {
+    margin-bottom: 3rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: auto;
+    padding-top: 2rem;
+    opacity: 0.7;
+}
+
+/* Aurora Text Effect */
+.aurora-text {
+    background: linear-gradient(
+        45deg,
+        #ff006e,
+        #8338ec,
+        #3a86ff,
+        #06ffa5,
+        #ffbe0b,
+        #fb5607,
+        #ff006e
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: aurora 8s ease-in-out infinite;
+    position: relative;
+}
+
+.aurora-text::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: linear-gradient(
+        45deg,
+        #ff006e,
+        #8338ec,
+        #3a86ff,
+        #06ffa5,
+        #ffbe0b,
+        #fb5607,
+        #ff006e
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: aurora 8s ease-in-out infinite reverse;
+    opacity: 0.3;
+    filter: blur(2px);
+}
+
+@keyframes aurora {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+}
+
+/* Hover effects */
+.aurora-text:hover {
+    animation-duration: 4s;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}

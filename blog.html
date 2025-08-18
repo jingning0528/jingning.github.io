@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jingning - Personal Website</title>
+    <title>Blog - Jingning</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -26,21 +26,37 @@
 
     <div class="container">
         <header>
-            <h1 class="aurora-text typewriter" id="mainTitle">JingNing</h1>
-            <p class="aurora-text subtitle typewriter" id="subtitle">Welcome to my personal space</p>
+            <h1 class="aurora-text typewriter" id="mainTitle">Blog</h1>
+            <p class="aurora-text subtitle typewriter" id="subtitle">Thoughts, ideas, and insights</p>
+            <a href="index.html" class="aurora-text link-button typewriter" id="homeLink">← Back to Home</a>
         </header>
         
         <main>
             <section class="content">
-                <h2 class="aurora-text typewriter" id="blogTitle">Blog</h2>
-                <p class="aurora-text typewriter" id="blogText">Thoughts, ideas, and insights from my journey...</p>
-                <a href="blog.html" class="aurora-text link-button typewriter" id="blogLink">Read More</a>
+                <article class="blog-post">
+                    <h2 class="aurora-text typewriter" id="post1Title">Getting Started with Web Development</h2>
+                    <p class="aurora-text typewriter" id="post1Date">December 2024</p>
+                    <p class="aurora-text typewriter" id="post1Excerpt">Exploring the fundamentals of modern web development and the tools that make it all possible...</p>
+                    <a href="#" class="aurora-text link-button typewriter" id="post1Link">Read Full Post</a>
+                </article>
             </section>
             
             <section class="content">
-                <h2 class="aurora-text typewriter" id="projectsTitle">Projects</h2>
-                <p class="aurora-text typewriter" id="projectsText">Explore my latest work and creations...</p>
-                <a href="projects.html" class="aurora-text link-button typewriter" id="projectsLink">View Projects</a>
+                <article class="blog-post">
+                    <h2 class="aurora-text typewriter" id="post2Title">The Art of Code Design</h2>
+                    <p class="aurora-text typewriter" id="post2Date">November 2024</p>
+                    <p class="aurora-text typewriter" id="post2Excerpt">How beautiful code design can transform the way we think about programming...</p>
+                    <a href="#" class="aurora-text link-button typewriter" id="post2Link">Read Full Post</a>
+                </article>
+            </section>
+            
+            <section class="content">
+                <article class="blog-post">
+                    <h2 class="aurora-text typewriter" id="post3Title">Future of Technology</h2>
+                    <p class="aurora-text typewriter" id="post3Date">October 2024</p>
+                    <p class="aurora-text typewriter" id="post3Excerpt">My thoughts on emerging technologies and their impact on our digital future...</p>
+                    <a href="#" class="aurora-text link-button typewriter" id="post3Link">Read Full Post</a>
+                </article>
             </section>
         </main>
     </div>
@@ -171,14 +187,21 @@
             }
             
             // Animate elements in sequence
-            setTimeout(() => typeWriter(document.getElementById('mainTitle'), 'JingNing', 150), 500);
-            setTimeout(() => typeWriter(document.getElementById('subtitle'), 'Welcome to my personal space', 80), 2000);
-            setTimeout(() => typeWriter(document.getElementById('blogTitle'), 'Blog', 100), 4000);
-            setTimeout(() => typeWriter(document.getElementById('blogText'), 'Thoughts, ideas, and insights from my journey...', 50), 4500);
-            setTimeout(() => typeWriter(document.getElementById('blogLink'), 'Read More', 80), 5000);
-            setTimeout(() => typeWriter(document.getElementById('projectsTitle'), 'Projects', 100), 7000);
-            setTimeout(() => typeWriter(document.getElementById('projectsText'), 'Explore my latest work and creations...', 50), 7500);
-            setTimeout(() => typeWriter(document.getElementById('projectsLink'), 'View Projects', 80), 8000);
+            setTimeout(() => typeWriter(document.getElementById('mainTitle'), 'Blog', 150), 500);
+            setTimeout(() => typeWriter(document.getElementById('subtitle'), 'Thoughts, ideas, and insights', 80), 2000);
+            setTimeout(() => typeWriter(document.getElementById('homeLink'), '← Back to Home', 80), 3000);
+            setTimeout(() => typeWriter(document.getElementById('post1Title'), 'Getting Started with Web Development', 50), 4000);
+            setTimeout(() => typeWriter(document.getElementById('post1Date'), 'December 2024', 80), 5000);
+            setTimeout(() => typeWriter(document.getElementById('post1Excerpt'), 'Exploring the fundamentals of modern web development and the tools that make it all possible...', 30), 5500);
+            setTimeout(() => typeWriter(document.getElementById('post1Link'), 'Read Full Post', 80), 7000);
+            setTimeout(() => typeWriter(document.getElementById('post2Title'), 'The Art of Code Design', 50), 8000);
+            setTimeout(() => typeWriter(document.getElementById('post2Date'), 'November 2024', 80), 8500);
+            setTimeout(() => typeWriter(document.getElementById('post2Excerpt'), 'How beautiful code design can transform the way we think about programming...', 30), 9000);
+            setTimeout(() => typeWriter(document.getElementById('post2Link'), 'Read Full Post', 80), 10500);
+            setTimeout(() => typeWriter(document.getElementById('post3Title'), 'Future of Technology', 50), 11500);
+            setTimeout(() => typeWriter(document.getElementById('post3Date'), 'October 2024', 80), 12000);
+            setTimeout(() => typeWriter(document.getElementById('post3Excerpt'), 'My thoughts on emerging technologies and their impact on our digital future...', 30), 12500);
+            setTimeout(() => typeWriter(document.getElementById('post3Link'), 'Read Full Post', 80), 14000);
         });
     </script>
 </body>

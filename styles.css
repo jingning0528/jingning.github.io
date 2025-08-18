@@ -176,6 +176,32 @@ p {
     margin-bottom: 0.5rem;
 }
 
+.blog-content {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.blog-content h3 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding-left: 1rem;
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.blog-content strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
 /* Typewriter Animation */
 .typewriter {
     visibility: hidden;

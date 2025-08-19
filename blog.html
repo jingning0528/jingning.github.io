@@ -7,226 +7,46 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Mouse Effect Canvas -->
-    <canvas id="mouseCanvas"></canvas>
-    
-    <!-- Video Background -->
-    <div class="video-background">
-        <video id="backgroundVideo1" muted playsinline class="video-layer active">
-            <source src="background_video.MOV" type="video/quicktime">
-            <source src="background_video.MOV" type="video/mp4">
-        </video>
-        <video id="backgroundVideo2" muted playsinline class="video-layer">
-            <source src="background_video.MOV" type="video/quicktime">
-            <source src="background_video.MOV" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
-
-    <div class="container">
+<body class="plain-page">
+    <div class="container page-transition">
         <header>
-            <h1 class="aurora-text typewriter" id="mainTitle">Blog</h1>
-            <p class="aurora-text subtitle typewriter" id="subtitle">Thoughts, ideas, and insights</p>
-            <a href="index.html" class="aurora-text link-button typewriter" id="homeLink">← Back to Home</a>
+            <h1 class="plain-text" id="mainTitle">Blog</h1>
+            <p class="plain-text subtitle" id="subtitle">Thoughts, ideas, and insights</p>
+            <a href="index.html" class="plain-text link-button" id="homeLink">← Back to Home</a>
         </header>
         
         <main>
             <section class="content">
                 <article class="blog-post">
-                    <h2 class="aurora-text typewriter" id="postTitle">Capability vs Reliability: The Real Challenge of LLM</h2>
-                    <p class="aurora-text typewriter" id="postDate">December 2024</p>
-                    
-                    <div class="blog-content">
-                        <p class="aurora-text typewriter" id="intro">We are shocked by new developments day by day, and we all have the ambition to achieve big. But what really matters is reliability first. There are still a few challenges that bother people, and I hope to work on small pieces of these in the future.</p>
-                        
-                        <h3 class="aurora-text typewriter" id="challenge1">1. Hallucination</h3>
-                        <p class="aurora-text typewriter" id="challenge1Desc">LLMs sometimes "make things up" with confidence. They don't really know facts; they just predict words.</p>
-                        <p class="aurora-text typewriter" id="challenge1Fix"><strong>Current fix:</strong> Retrieval-Augmented Generation (RAG), grounding models with external databases.</p>
-                        <p class="aurora-text typewriter" id="challenge1Remain"><strong>Remains:</strong> Models still blend real facts with fiction. Better fact-checking and trust signals are needed.</p>
-                        
-                        <h3 class="aurora-text typewriter" id="challenge2">2. Ingratiation</h3>
-                        <p class="aurora-text typewriter" id="challenge2Desc">Models tend to agree with users instead of correcting false assumptions.</p>
-                        <p class="aurora-text typewriter" id="challenge2Fix"><strong>Current fix:</strong> Reinforcement Learning with Human Feedback (RLHF) helps models learn when to push back.</p>
-                        <p class="aurora-text typewriter" id="challenge2Remain"><strong>Remains:</strong> Hard to balance being polite with being accurate. Models often still "echo" user mistakes.</p>
-                        
-                        <h3 class="aurora-text typewriter" id="challenge3">3. Bias</h3>
-                        <p class="aurora-text typewriter" id="challenge3Desc">LLMs carry human bias from training data—gender, culture, politics, etc.</p>
-                        <p class="aurora-text typewriter" id="challenge3Fix"><strong>Current fix:</strong> Data filtering, fairness constraints, bias audits.</p>
-                        <p class="aurora-text typewriter" id="challenge3Remain"><strong>Remains:</strong> Subtle bias is hard to detect and often slips through. No universal measure of "fairness" yet.</p>
-                        
-                        <h3 class="aurora-text typewriter" id="challenge4">4. Privacy</h3>
-                        <p class="aurora-text typewriter" id="challenge4Desc">Models risk leaking sensitive or private information.</p>
-                        <p class="aurora-text typewriter" id="challenge4Fix"><strong>Current fix:</strong> Differential Privacy, secure training pipelines, strict red-teaming.</p>
-                        <p class="aurora-text typewriter" id="challenge4Remain"><strong>Remains:</strong> Trade-off between privacy and accuracy is unsolved, and enterprise data safety is still fragile.</p>
-                        
-                        <h3 class="aurora-text typewriter" id="challenge5">5. Cost and Energy</h3>
-                        <p class="aurora-text typewriter" id="challenge5Desc">LLMs demand massive GPUs, electricity, and cooling.</p>
-                        <p class="aurora-text typewriter" id="challenge5Fix"><strong>Current fix:</strong> Model compression, distillation, efficient architectures (e.g., Mixture of Experts).</p>
-                        <p class="aurora-text typewriter" id="challenge5Remain"><strong>Remains:</strong> Cost is still a barrier; running models sustainably and cheaply at scale is not solved.</p>
-                        
-                        <h3 class="aurora-text typewriter" id="finalThought">Final Thought</h3>
-                        <p class="aurora-text typewriter" id="conclusion">The impressive capability of LLMs often hides their reliability gap. If we want them to truly serve people, solving these challenges—step by step—will matter more than chasing size alone.</p>
-                    </div>
+                    <h2 class="plain-text" id="postTitle">Capability vs Reliability: The Real Challenge of LLM</h2>
+                    <p class="plain-text" id="postDate">August 2025</p>
+                    <a href="blog-detail.html" class="plain-text link-button" id="viewBlogLink">View Blog</a>
                 </article>
             </section>
         </main>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mouse effect canvas setup
-            const canvas = document.getElementById('mouseCanvas');
-            const ctx = canvas.getContext('2d');
+        // Smooth page transitions
+        function smoothPageTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-20px)';
+            document.body.style.transition = 'all 0.4s ease-in-out';
             
-            // Set canvas size
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            
-            // Mouse tracking
-            let mouseX = 0;
-            let mouseY = 0;
-            let particles = [];
-            
-            // Track mouse position
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            // Particle class
-            class Particle {
-                constructor(x, y) {
-                    this.x = x;
-                    this.y = y;
-                    this.vx = (Math.random() - 0.5) * 1.5;
-                    this.vy = (Math.random() - 0.5) * 1.5;
-                    this.life = 1;
-                    this.decay = Math.random() * 0.015 + 0.005;
-                    this.size = Math.random() * 3 + 1;
-                    this.color = '#ffffff';
-                }
-                
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    this.life -= this.decay;
-                    this.size *= 0.98;
-                }
-                
-                draw() {
-                    ctx.save();
-                    ctx.globalAlpha = this.life;
-                    ctx.fillStyle = this.color;
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = this.color;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.restore();
-                }
-            }
-            
-            // Animation loop
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // Add new particles at mouse position
-                if (Math.random() < 0.25) {
-                    particles.push(new Particle(mouseX, mouseY));
-                }
-                
-                // Update and draw particles
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    particles[i].update();
-                    particles[i].draw();
-                    
-                    // Remove dead particles
-                    if (particles[i].life <= 0) {
-                        particles.splice(i, 1);
-                    }
-                }
-                
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-            
-            // Video background logic
-            const video1 = document.getElementById('backgroundVideo1');
-            const video2 = document.getElementById('backgroundVideo2');
-            let currentVideo = video1;
-            let nextVideo = video2;
-            
-            function switchVideos() {
-                currentVideo.classList.remove('active');
-                currentVideo.classList.add('fading');
-                
-                nextVideo.currentTime = 0;
-                nextVideo.play();
-                nextVideo.classList.add('active');
-                nextVideo.classList.remove('fading');
-                
-                [currentVideo, nextVideo] = [nextVideo, currentVideo];
-            }
-            
-            video1.play();
-            video1.addEventListener('ended', switchVideos);
-            video2.addEventListener('ended', switchVideos);
-            
-            video1.addEventListener('loadedmetadata', function() {
-                video1.play();
-            });
-            
-            // Typewriter animation function
-            function typeWriter(element, text, speed = 100) {
-                element.innerHTML = '';
-                element.style.visibility = 'visible';
-                
-                let i = 0;
-                function type() {
-                    if (i < text.length) {
-                        element.innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(type, speed);
-                    }
-                }
-                type();
-            }
-            
-            // Animate elements in sequence
-            setTimeout(() => typeWriter(document.getElementById('mainTitle'), 'Blog', 150), 500);
-            setTimeout(() => typeWriter(document.getElementById('subtitle'), 'Thoughts, ideas, and insights', 80), 2000);
-            setTimeout(() => typeWriter(document.getElementById('homeLink'), '← Back to Home', 80), 3000);
-            setTimeout(() => typeWriter(document.getElementById('postTitle'), 'Capability vs Reliability: The Real Challenge of LLM', 30), 4000);
-            setTimeout(() => typeWriter(document.getElementById('postDate'), 'December 2024', 80), 6000);
-            setTimeout(() => typeWriter(document.getElementById('intro'), 'We are shocked by new developments day by day, and we all have the ambition to achieve big. But what really matters is reliability first. There are still a few challenges that bother people, and I hope to work on small pieces of these in the future.', 20), 6500);
-            setTimeout(() => typeWriter(document.getElementById('challenge1'), '1. Hallucination', 80), 12000);
-            setTimeout(() => typeWriter(document.getElementById('challenge1Desc'), 'LLMs sometimes "make things up" with confidence. They don\'t really know facts; they just predict words.', 20), 12500);
-            setTimeout(() => typeWriter(document.getElementById('challenge1Fix'), 'Current fix: Retrieval-Augmented Generation (RAG), grounding models with external databases.', 20), 13000);
-            setTimeout(() => typeWriter(document.getElementById('challenge1Remain'), 'Remains: Models still blend real facts with fiction. Better fact-checking and trust signals are needed.', 20), 13500);
-            setTimeout(() => typeWriter(document.getElementById('challenge2'), '2. Ingratiation', 80), 15000);
-            setTimeout(() => typeWriter(document.getElementById('challenge2Desc'), 'Models tend to agree with users instead of correcting false assumptions.', 20), 15500);
-            setTimeout(() => typeWriter(document.getElementById('challenge2Fix'), 'Current fix: Reinforcement Learning with Human Feedback (RLHF) helps models learn when to push back.', 20), 16000);
-            setTimeout(() => typeWriter(document.getElementById('challenge2Remain'), 'Remains: Hard to balance being polite with being accurate. Models often still "echo" user mistakes.', 20), 16500);
-            setTimeout(() => typeWriter(document.getElementById('challenge3'), '3. Bias', 80), 18000);
-            setTimeout(() => typeWriter(document.getElementById('challenge3Desc'), 'LLMs carry human bias from training data—gender, culture, politics, etc.', 20), 18500);
-            setTimeout(() => typeWriter(document.getElementById('challenge3Fix'), 'Current fix: Data filtering, fairness constraints, bias audits.', 20), 19000);
-            setTimeout(() => typeWriter(document.getElementById('challenge3Remain'), 'Remains: Subtle bias is hard to detect and often slips through. No universal measure of "fairness" yet.', 20), 19500);
-            setTimeout(() => typeWriter(document.getElementById('challenge4'), '4. Privacy', 80), 21000);
-            setTimeout(() => typeWriter(document.getElementById('challenge4Desc'), 'Models risk leaking sensitive or private information.', 20), 21500);
-            setTimeout(() => typeWriter(document.getElementById('challenge4Fix'), 'Current fix: Differential Privacy, secure training pipelines, strict red-teaming.', 20), 22000);
-            setTimeout(() => typeWriter(document.getElementById('challenge4Remain'), 'Remains: Trade-off between privacy and accuracy is unsolved, and enterprise data safety is still fragile.', 20), 22500);
-            setTimeout(() => typeWriter(document.getElementById('challenge5'), '5. Cost and Energy', 80), 24000);
-            setTimeout(() => typeWriter(document.getElementById('challenge5Desc'), 'LLMs demand massive GPUs, electricity, and cooling.', 20), 24500);
-            setTimeout(() => typeWriter(document.getElementById('challenge5Fix'), 'Current fix: Model compression, distillation, efficient architectures (e.g., Mixture of Experts).', 20), 25000);
-            setTimeout(() => typeWriter(document.getElementById('challenge5Remain'), 'Remains: Cost is still a barrier; running models sustainably and cheaply at scale is not solved.', 20), 25500);
-            setTimeout(() => typeWriter(document.getElementById('finalThought'), 'Final Thought', 80), 27000);
-            setTimeout(() => typeWriter(document.getElementById('conclusion'), 'The impressive capability of LLMs often hides their reliability gap. If we want them to truly serve people, solving these challenges—step by step—will matter more than chasing size alone.', 20), 27500);
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+        
+        // Add click event listeners for smooth transitions
+        document.getElementById('homeLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothPageTransition('index.html');
+        });
+        
+        document.getElementById('viewBlogLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothPageTransition('blog-detail.html');
         });
     </script>
 </body>

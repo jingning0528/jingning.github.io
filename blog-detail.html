@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capability vs Reliability: The Real Challenge of LLM - Jingning</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="blog-detail-page">
+    <div class="container page-transition">
+        <header>
+            <h1 class="plain-text" id="mainTitle">Capability vs Reliability: The Real Challenge of LLM</h1>
+            <p class="plain-text subtitle" id="subtitle">August 2025</p>
+            <a href="blog.html" class="plain-text link-button" id="backLink">← Back to Blog</a>
+        </header>
+        
+        <main>
+            <section class="content">
+                <article class="blog-post">
+                    <div class="blog-content">
+                        <p class="plain-text" id="intro">We are shocked by new developments day by day, and we all have the ambition to achieve big. But what really matters is reliability first. There are still a few challenges that bother people, and I hope to work on small pieces of these in the future.</p>
+                        
+                        <h3 class="plain-text" id="challenge1">1. Hallucination</h3>
+                        <p class="plain-text" id="challenge1Desc">LLMs sometimes "make things up" with confidence. They don't really know facts; they just predict words.</p>
+                        <p class="plain-text" id="challenge1Fix"><strong>Current fix:</strong> Retrieval-Augmented Generation (RAG), grounding models with external databases.</p>
+                        <p class="plain-text" id="challenge1Remain"><strong>Remains:</strong> Models still blend real facts with fiction. Better fact-checking and trust signals are needed.</p>
+                        
+                        <h3 class="plain-text" id="challenge2">2. Ingratiation</h3>
+                        <p class="plain-text" id="challenge2Desc">Models tend to agree with users instead of correcting false assumptions.</p>
+                        <p class="plain-text" id="challenge2Fix"><strong>Current fix:</strong> Reinforcement Learning with Human Feedback (RLHF) helps models learn when to push back.</p>
+                        <p class="plain-text" id="challenge2Remain"><strong>Remains:</strong> Hard to balance being polite with being accurate. Models often still "echo" user mistakes.</p>
+                        
+                        <h3 class="plain-text" id="challenge3">3. Bias</h3>
+                        <p class="plain-text" id="challenge3Desc">LLMs carry human bias from training data—gender, culture, politics, etc.</p>
+                        <p class="plain-text" id="challenge3Fix"><strong>Current fix:</strong> Data filtering, fairness constraints, bias audits.</p>
+                        <p class="plain-text" id="challenge3Remain"><strong>Remains:</strong> Subtle bias is hard to detect and often slips through. No universal measure of "fairness" yet.</p>
+                        
+                        <h3 class="plain-text" id="challenge4">4. Privacy</h3>
+                        <p class="plain-text" id="challenge4Desc">Models risk leaking sensitive or private information.</p>
+                        <p class="plain-text" id="challenge4Fix"><strong>Current fix:</strong> Differential Privacy, secure training pipelines, strict red-teaming.</p>
+                        <p class="plain-text" id="challenge4Remain"><strong>Remains:</strong> Trade-off between privacy and accuracy is unsolved, and enterprise data safety is still fragile.</p>
+                        
+                        <h3 class="plain-text" id="challenge5">5. Cost and Energy</h3>
+                        <p class="plain-text" id="challenge5Desc">LLMs demand massive GPUs, electricity, and cooling.</p>
+                        <p class="plain-text" id="challenge5Fix"><strong>Current fix:</strong> Model compression, distillation, efficient architectures (e.g., Mixture of Experts).</p>
+                        <p class="plain-text" id="challenge5Remain"><strong>Remains:</strong> Cost is still a barrier; running models sustainably and cheaply at scale is not solved.</p>
+                        
+                        <h3 class="plain-text" id="finalThought">Final Thought</h3>
+                        <p class="plain-text" id="conclusion">The impressive capability of LLMs often hides their reliability gap. If we want them to truly serve people, solving these challenges—step by step—will matter more than chasing size alone.</p>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Smooth page transitions
+        function smoothPageTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-20px)';
+            document.body.style.transition = 'all 0.4s ease-in-out';
+            
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+        
+        // Add click event listeners for smooth transitions
+        document.getElementById('backLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothPageTransition('blog.html');
+        });
+    </script>
+</body>
+</html>

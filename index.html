@@ -27,20 +27,15 @@
     <div class="container">
         <header>
             <h1 class="aurora-text typewriter" id="mainTitle">JingNing</h1>
-            <p class="aurora-text subtitle typewriter" id="subtitle">Welcome to my personal space</p>
         </header>
         
         <main>
             <section class="content">
-                <h2 class="aurora-text typewriter" id="blogTitle">Blog</h2>
-                <p class="aurora-text typewriter" id="blogText">Thoughts, ideas, and insights from my journey...</p>
-                <a href="blog.html" class="aurora-text link-button typewriter" id="blogLink">Read More</a>
+                <a href="blog.html" class="aurora-text fade-in" id="blogTitle">Blog</a>
             </section>
             
             <section class="content">
-                <h2 class="aurora-text typewriter" id="projectsTitle">Projects</h2>
-                <p class="aurora-text typewriter" id="projectsText">Explore my latest work and creations...</p>
-                <a href="projects.html" class="aurora-text link-button typewriter" id="projectsLink">View Projects</a>
+                <a href="projects.html" class="aurora-text fade-in" id="projectsTitle">Projects</a>
             </section>
         </main>
     </div>
@@ -172,13 +167,37 @@
             
             // Animate elements in sequence
             setTimeout(() => typeWriter(document.getElementById('mainTitle'), 'JingNing', 150), 500);
-            setTimeout(() => typeWriter(document.getElementById('subtitle'), 'Welcome to my personal space', 80), 2000);
-            setTimeout(() => typeWriter(document.getElementById('blogTitle'), 'Blog', 100), 4000);
-            setTimeout(() => typeWriter(document.getElementById('blogText'), 'Thoughts, ideas, and insights from my journey...', 50), 4500);
-            setTimeout(() => typeWriter(document.getElementById('blogLink'), 'Read More', 80), 5000);
-            setTimeout(() => typeWriter(document.getElementById('projectsTitle'), 'Projects', 100), 7000);
-            setTimeout(() => typeWriter(document.getElementById('projectsText'), 'Explore my latest work and creations...', 50), 7500);
-            setTimeout(() => typeWriter(document.getElementById('projectsLink'), 'View Projects', 80), 8000);
+            
+            // Trigger fade-in animations after typewriter finishes
+            setTimeout(() => {
+                document.getElementById('blogTitle').style.animation = 'fadeIn 1.5s ease-in-out forwards';
+            }, 2000); // Start after "JingNing" typewriter (500ms + ~1500ms for typing)
+            
+            setTimeout(() => {
+                document.getElementById('projectsTitle').style.animation = 'fadeIn 1.5s ease-in-out forwards';
+            }, 3500); // Start 1.5s after Blog button
+            
+            // Smooth page transitions
+            function smoothPageTransition(url) {
+                document.body.style.opacity = '0';
+                document.body.style.transform = 'translateY(-20px)';
+                document.body.style.transition = 'all 0.4s ease-in-out';
+                
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 400);
+            }
+            
+            // Add click event listeners for smooth transitions
+            document.getElementById('blogTitle').addEventListener('click', function(e) {
+                e.preventDefault();
+                smoothPageTransition('blog.html');
+            });
+            
+            document.getElementById('projectsTitle').addEventListener('click', function(e) {
+                e.preventDefault();
+                smoothPageTransition('projects.html');
+            });
         });
     </script>
 </body>

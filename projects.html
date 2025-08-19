@@ -7,214 +7,69 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Mouse Effect Canvas -->
-    <canvas id="mouseCanvas"></canvas>
-    
-    <!-- Video Background -->
-    <div class="video-background">
-        <video id="backgroundVideo1" muted playsinline class="video-layer active">
-            <source src="background_video.MOV" type="video/quicktime">
-            <source src="background_video.MOV" type="video/mp4">
-        </video>
-        <video id="backgroundVideo2" muted playsinline class="video-layer">
-            <source src="background_video.MOV" type="video/quicktime">
-            <source src="background_video.MOV" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
-
-    <div class="container">
+<body class="plain-page">
+    <div class="container page-transition">
         <header>
-            <h1 class="aurora-text typewriter" id="mainTitle">Projects</h1>
-            <p class="aurora-text subtitle typewriter" id="subtitle">My latest work and creations</p>
-            <a href="index.html" class="aurora-text link-button typewriter" id="homeLink">← Back to Home</a>
+            <h1 class="plain-text" id="mainTitle">Projects</h1>
+            <p class="plain-text subtitle" id="subtitle">My latest work and creations</p>
+            <a href="index.html" class="plain-text link-button" id="homeLink">← Back to Home</a>
         </header>
         
         <main>
             <section class="content">
                 <article class="project-item">
-                    <h2 class="aurora-text typewriter" id="project1Title">Personal Website</h2>
-                    <p class="aurora-text typewriter" id="project1Tech">HTML, CSS, JavaScript</p>
-                    <p class="aurora-text typewriter" id="project1Desc">A dynamic personal website featuring video backgrounds, interactive effects, and modern design principles...</p>
-                    <a href="#" class="aurora-text link-button typewriter" id="project1Link">View Project</a>
+                    <h2 class="plain-text" id="project1Title">Personal Website</h2>
+                    <p class="plain-text" id="project1Tech">HTML, CSS, JavaScript</p>
+                    <p class="plain-text" id="project1Desc">A dynamic personal website featuring video backgrounds, interactive effects, and modern design principles...</p>
+                    <a href="#" class="plain-text link-button" id="project1Link">View Project</a>
                 </article>
             </section>
             
             <section class="content">
                 <article class="project-item">
-                    <h2 class="aurora-text typewriter" id="project2Title">Data Visualization Dashboard</h2>
-                    <p class="aurora-text typewriter" id="project2Tech">React, D3.js, Node.js</p>
-                    <p class="aurora-text typewriter" id="project2Desc">Interactive dashboard for real-time data visualization with dynamic charts and analytics...</p>
-                    <a href="#" class="aurora-text link-button typewriter" id="project2Link">View Project</a>
+                    <h2 class="plain-text" id="project2Title">Data Visualization Dashboard</h2>
+                    <p class="plain-text" id="project2Tech">React, D3.js, Node.js</p>
+                    <p class="plain-text" id="project2Desc">Interactive dashboard for real-time data visualization with dynamic charts and analytics...</p>
+                    <a href="#" class="plain-text link-button" id="project2Link">View Project</a>
                 </article>
             </section>
             
             <section class="content">
                 <article class="project-item">
-                    <h2 class="aurora-text typewriter" id="project3Title">AI Chat Application</h2>
-                    <p class="aurora-text typewriter" id="project3Tech">Python, TensorFlow, Flask</p>
-                    <p class="aurora-text typewriter" id="project3Desc">Intelligent chatbot powered by machine learning with natural language processing capabilities...</p>
-                    <a href="#" class="aurora-text link-button typewriter" id="project3Link">View Project</a>
+                    <h2 class="plain-text" id="project3Title">AI Chat Application</h2>
+                    <p class="plain-text" id="project3Tech">Python, TensorFlow, Flask</p>
+                    <p class="plain-text" id="project3Desc">Intelligent chatbot powered by machine learning with natural language processing capabilities...</p>
+                    <a href="#" class="plain-text link-button" id="project3Link">View Project</a>
                 </article>
             </section>
             
             <section class="content">
                 <article class="project-item">
-                    <h2 class="aurora-text typewriter" id="project4Title">Mobile Game</h2>
-                    <p class="aurora-text typewriter" id="project4Tech">Unity, C#, Mobile Development</p>
-                    <p class="aurora-text typewriter" id="project4Desc">Cross-platform mobile game with engaging gameplay mechanics and stunning visuals...</p>
-                    <a href="#" class="aurora-text link-button typewriter" id="project4Link">View Project</a>
+                    <h2 class="plain-text" id="project4Title">Mobile Game</h2>
+                    <p class="plain-text" id="project4Tech">Unity, C#, Mobile Development</p>
+                    <p class="plain-text" id="project4Desc">Cross-platform mobile game with engaging gameplay mechanics and stunning visuals...</p>
+                    <a href="#" class="plain-text link-button" id="project4Link">View Project</a>
                 </article>
             </section>
         </main>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mouse effect canvas setup
-            const canvas = document.getElementById('mouseCanvas');
-            const ctx = canvas.getContext('2d');
+        // Smooth page transitions
+        function smoothPageTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-20px)';
+            document.body.style.transition = 'all 0.4s ease-in-out';
             
-            // Set canvas size
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            
-            // Mouse tracking
-            let mouseX = 0;
-            let mouseY = 0;
-            let particles = [];
-            
-            // Track mouse position
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            // Particle class
-            class Particle {
-                constructor(x, y) {
-                    this.x = x;
-                    this.y = y;
-                    this.vx = (Math.random() - 0.5) * 1.5;
-                    this.vy = (Math.random() - 0.5) * 1.5;
-                    this.life = 1;
-                    this.decay = Math.random() * 0.015 + 0.005;
-                    this.size = Math.random() * 3 + 1;
-                    this.color = '#ffffff';
-                }
-                
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    this.life -= this.decay;
-                    this.size *= 0.98;
-                }
-                
-                draw() {
-                    ctx.save();
-                    ctx.globalAlpha = this.life;
-                    ctx.fillStyle = this.color;
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = this.color;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.restore();
-                }
-            }
-            
-            // Animation loop
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // Add new particles at mouse position
-                if (Math.random() < 0.25) {
-                    particles.push(new Particle(mouseX, mouseY));
-                }
-                
-                // Update and draw particles
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    particles[i].update();
-                    particles[i].draw();
-                    
-                    // Remove dead particles
-                    if (particles[i].life <= 0) {
-                        particles.splice(i, 1);
-                    }
-                }
-                
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-            
-            // Video background logic
-            const video1 = document.getElementById('backgroundVideo1');
-            const video2 = document.getElementById('backgroundVideo2');
-            let currentVideo = video1;
-            let nextVideo = video2;
-            
-            function switchVideos() {
-                currentVideo.classList.remove('active');
-                currentVideo.classList.add('fading');
-                
-                nextVideo.currentTime = 0;
-                nextVideo.play();
-                nextVideo.classList.add('active');
-                nextVideo.classList.remove('fading');
-                
-                [currentVideo, nextVideo] = [nextVideo, currentVideo];
-            }
-            
-            video1.play();
-            video1.addEventListener('ended', switchVideos);
-            video2.addEventListener('ended', switchVideos);
-            
-            video1.addEventListener('loadedmetadata', function() {
-                video1.play();
-            });
-            
-            // Typewriter animation function
-            function typeWriter(element, text, speed = 100) {
-                element.innerHTML = '';
-                element.style.visibility = 'visible';
-                
-                let i = 0;
-                function type() {
-                    if (i < text.length) {
-                        element.innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(type, speed);
-                    }
-                }
-                type();
-            }
-            
-            // Animate elements in sequence
-            setTimeout(() => typeWriter(document.getElementById('mainTitle'), 'Projects', 150), 500);
-            setTimeout(() => typeWriter(document.getElementById('subtitle'), 'My latest work and creations', 80), 2000);
-            setTimeout(() => typeWriter(document.getElementById('homeLink'), '← Back to Home', 80), 3000);
-            setTimeout(() => typeWriter(document.getElementById('project1Title'), 'Personal Website', 50), 4000);
-            setTimeout(() => typeWriter(document.getElementById('project1Tech'), 'HTML, CSS, JavaScript', 80), 4500);
-            setTimeout(() => typeWriter(document.getElementById('project1Desc'), 'A dynamic personal website featuring video backgrounds, interactive effects, and modern design principles...', 30), 5000);
-            setTimeout(() => typeWriter(document.getElementById('project1Link'), 'View Project', 80), 6500);
-            setTimeout(() => typeWriter(document.getElementById('project2Title'), 'Data Visualization Dashboard', 50), 7500);
-            setTimeout(() => typeWriter(document.getElementById('project2Tech'), 'React, D3.js, Node.js', 80), 8000);
-            setTimeout(() => typeWriter(document.getElementById('project2Desc'), 'Interactive dashboard for real-time data visualization with dynamic charts and analytics...', 30), 8500);
-            setTimeout(() => typeWriter(document.getElementById('project2Link'), 'View Project', 80), 10000);
-            setTimeout(() => typeWriter(document.getElementById('project3Title'), 'AI Chat Application', 50), 11000);
-            setTimeout(() => typeWriter(document.getElementById('project3Tech'), 'Python, TensorFlow, Flask', 80), 11500);
-            setTimeout(() => typeWriter(document.getElementById('project3Desc'), 'Intelligent chatbot powered by machine learning with natural language processing capabilities...', 30), 12000);
-            setTimeout(() => typeWriter(document.getElementById('project3Link'), 'View Project', 80), 13500);
-            setTimeout(() => typeWriter(document.getElementById('project4Title'), 'Mobile Game', 50), 14500);
-            setTimeout(() => typeWriter(document.getElementById('project4Tech'), 'Unity, C#, Mobile Development', 80), 15000);
-            setTimeout(() => typeWriter(document.getElementById('project4Desc'), 'Cross-platform mobile game with engaging gameplay mechanics and stunning visuals...', 30), 15500);
-            setTimeout(() => typeWriter(document.getElementById('project4Link'), 'View Project', 80), 17000);
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+        
+        // Add click event listeners for smooth transitions
+        document.getElementById('homeLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothPageTransition('index.html');
         });
     </script>
 </body>

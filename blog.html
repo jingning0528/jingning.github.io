@@ -16,12 +16,8 @@
         </header>
         
         <main>
-            <section class="content">
-                <article class="blog-post">
-                    <h2 class="plain-text" id="postTitle">Capability vs Reliability: The Real Challenge of LLM</h2>
-                    <p class="plain-text" id="postDate">August 2025</p>
-                    <a href="blog-detail.html" class="plain-text link-button" id="viewBlogLink">View Blog</a>
-                </article>
+            <section class="content" id="blogList">
+                <!-- Blog posts will be loaded dynamically -->
             </section>
         </main>
     </div>
@@ -38,16 +34,69 @@
             }, 400);
         }
         
+        // Load blog posts from JSON
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('blog-data.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                const blogList = document.getElementById('blogList');
+                
+                // Sort posts by date (newest first)
+                const sortedPosts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                sortedPosts.forEach((post, index) => {
+                    const article = document.createElement('article');
+                    article.className = 'blog-post';
+                    
+                    article.innerHTML = `
+                        <h2 class="plain-text">${post.title}</h2>
+                        <p class="plain-text">${post.shortDate}</p>
+                        <a href="blog-detail.html?id=${post.id}" class="plain-text link-button">View Blog</a>
+                    `;
+                    
+                    // Add click event listener for smooth transition
+                    const link = article.querySelector('a');
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        smoothPageTransition(`blog-detail.html?id=${post.id}`);
+                    });
+                    
+                    blogList.appendChild(article);
+                });
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                document.getElementById('blogList').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p class="plain-text">Error loading blog posts.</p>
+                        <p class="plain-text" style="font-size: 0.9rem; margin-top: 1rem;">
+                            This might be due to CORS restrictions when opening files directly in the browser.<br>
+                            Please use a local server instead:
+                        </p>
+                        <div style="background: #1a1a1a; padding: 1rem; margin: 1rem 0; border-radius: 4px; font-family: monospace;">
+                            <p style="margin: 0; color: #00ff00;">python3 -m http.server 8000</p>
+                        </div>
+                        <p class="plain-text" style="font-size: 0.9rem;">
+                            Then visit: <a href="http://localhost:8000/blog.html" style="color: #00ff00;">http://localhost:8000/blog.html</a>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        
         // Add click event listeners for smooth transitions
         document.getElementById('homeLink').addEventListener('click', function(e) {
             e.preventDefault();
             smoothPageTransition('index.html');
         });
         
-        document.getElementById('viewBlogLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            smoothPageTransition('blog-detail.html');
-        });
+        // Load blog posts when page loads
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
 </html>

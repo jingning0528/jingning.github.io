@@ -1,0 +1,93 @@
+{
+  "posts": [
+    {
+      "id": "privacy-rag",
+      "title": "Privacy in RAG: Risks and Fixes Along the Pipeline",
+      "date": "2025-08-19",
+      "shortDate": "August 19, 2025",
+      "intro": "The RAG has been widely used in industry because it can keep databases internal and reduce mistakes. But the privacy problem still exists during the whole process. I conclude the different kinds of privacy risks and how we could fix them. Hope this provides some insights for future study.",
+      "content": [
+        {
+          "type": "section",
+          "title": "1. Database Stores Documents",
+          "risk": "Sensitive data (PII, secrets, contracts) is stored. If attackers access the database or embeddings leak, they may recover the text.",
+          "solution": "Encrypt storage, apply strict access control, avoid sharing embeddings, detect and remove PII before indexing.",
+          "notFixed": "Embedding inversion — attackers can guess text from vectors. Preventing this without losing accuracy is still open."
+        },
+        {
+          "type": "section",
+          "title": "2. Retrieve Documents for a Query",
+          "risk": "Wrong people may retrieve private docs (cross-user leakage).",
+          "solution": "Use tenant separation and permission checks before retrieval.",
+          "notFixed": "Membership inference — attackers probing to guess whether certain documents exist."
+        },
+        {
+          "type": "section",
+          "title": "3. Feed Retrieved Docs into LLM Prompt",
+          "risk": [
+            "Indirect prompt injection: Malicious text inside docs can trick the LLM (\"ignore rules,\" \"reveal password\").",
+            "Sensitive leakage: The LLM may summarize or expose private details unintentionally."
+          ],
+          "solution": "Sanitize docs, scan for hidden instructions, use guardrail models (e.g., Prompt Guard, Llama Guard), filter PII before passing to LLM.",
+          "notFixed": "No reliable way yet to fully block hidden instructions in retrieved text."
+        },
+        {
+          "type": "section",
+          "title": "4. LLM Generates the Final Answer",
+          "risk": [
+            "The LLM may output private info directly.",
+            "It may combine different details into something more revealing."
+          ],
+          "solution": "Apply output filters (PII/secrets detection), limit context sharing, enforce policies on what can leave the system.",
+          "notFixed": "Balancing helpfulness with not leaking too much. No formal guarantee yet."
+        }
+      ],
+      "conclusion": "RAG improves reliability by grounding answers in real data, but privacy remains the weakest link. Every stage—storage, retrieval, prompting, generation—comes with its own risks. Fixes exist, but none are perfect. Bridging this gap between capability and privacy will be a key direction for future research."
+    },
+    {
+      "id": "capability-reliability",
+      "title": "Capability vs Reliability: The Real Challenge of LLM",
+      "date": "2025-08-18",
+      "shortDate": "August 18, 2025",
+      "intro": "We are shocked by new developments day by day, and we all have the ambition to achieve big. But what really matters is reliability first. There are still a few challenges that bother people, and I hope to work on small pieces of these in the future.",
+      "content": [
+        {
+          "type": "challenge",
+          "title": "1. Hallucination",
+          "description": "LLMs sometimes \"make things up\" with confidence. They don't really know facts; they just predict words.",
+          "fix": "Retrieval-Augmented Generation (RAG), grounding models with external databases.",
+          "remains": "Models still blend real facts with fiction. Better fact-checking and trust signals are needed."
+        },
+        {
+          "type": "challenge",
+          "title": "2. Ingratiation",
+          "description": "Models tend to agree with users instead of correcting false assumptions.",
+          "fix": "Reinforcement Learning with Human Feedback (RLHF) helps models learn when to push back.",
+          "remains": "Hard to balance being polite with being accurate. Models often still \"echo\" user mistakes."
+        },
+        {
+          "type": "challenge",
+          "title": "3. Bias",
+          "description": "LLMs carry human bias from training data—gender, culture, politics, etc.",
+          "fix": "Data filtering, fairness constraints, bias audits.",
+          "remains": "Subtle bias is hard to detect and often slips through. No universal measure of \"fairness\" yet."
+        },
+        {
+          "type": "challenge",
+          "title": "4. Privacy",
+          "description": "Models risk leaking sensitive or private information.",
+          "fix": "Differential Privacy, secure training pipelines, strict red-teaming.",
+          "remains": "Trade-off between privacy and accuracy is unsolved, and enterprise data safety is still fragile."
+        },
+        {
+          "type": "challenge",
+          "title": "5. Cost and Energy",
+          "description": "LLMs demand massive GPUs, electricity, and cooling.",
+          "fix": "Model compression, distillation, efficient architectures (e.g., Mixture of Experts).",
+          "remains": "Cost is still a barrier; running models sustainably and cheaply at scale is not solved."
+        }
+      ],
+      "conclusion": "The impressive capability of LLMs often hides their reliability gap. If we want them to truly serve people, solving these challenges—step by step—will matter more than chasing size alone."
+    }
+  ]
+}

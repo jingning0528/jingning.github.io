@@ -89,13 +89,53 @@
                             <p class="plain-text"><strong>Current fix:</strong> ${item.fix}</p>
                             <p class="plain-text"><strong>Remains:</strong> ${item.remains}</p>
                         `;
+                    } else if (item.type === 'category') {
+                        contentHTML += `
+                            <h3 class="plain-text">${item.title}</h3>
+                            <p class="plain-text">${item.description}</p>
+                        `;
+                    } else if (item.type === 'rerank') {
+                        contentHTML += `
+                            <h3 class="plain-text">${item.title}</h3>
+                            <p class="plain-text">${item.description}</p>
+                        `;
+                        
+                        if (item.figure) {
+                            contentHTML += `
+                                <div class="figure-container">
+                                    <img src="${item.figure}" alt="${item.title}" class="blog-figure">
+                                    <p class="figure-caption">Figure: ${item.title}</p>
+                                    ${item.citation ? `<p class="figure-citation">Cited by <a href="${item.citation}" target="_blank" class="plain-text link-button">${item.citation}</a></p>` : ''}
+                                </div>
+                            `;
+                        }
+                        
+                        if (item.steps) {
+                            contentHTML += `<ul class="plain-text">`;
+                            item.steps.forEach(step => {
+                                contentHTML += `<li>${step}</li>`;
+                            });
+                            contentHTML += `</ul>`;
+                        }
+                    } else if (item.type === 'advanced') {
+                        contentHTML += `
+                            <h3 class="plain-text">${item.title}</h3>
+                        `;
+                        
+                        if (item.papers) {
+                            contentHTML += `<ul class="plain-text">`;
+                            item.papers.forEach(paper => {
+                                contentHTML += `
+                                    <li>
+                                        <strong>${paper.title}:</strong> ${paper.description}
+                                        <br><a href="${paper.link}" target="_blank" class="plain-text link-button">arXiv</a>
+                                    </li>
+                                `;
+                            });
+                            contentHTML += `</ul>`;
+                        }
                     }
                 });
-                
-                contentHTML += `
-                    <h3 class="plain-text">Final Thought</h3>
-                    <p class="plain-text">${post.conclusion}</p>
-                `;
                 
                 document.getElementById('blogContent').innerHTML = contentHTML;
                 

@@ -554,3 +554,66 @@ html {
     letter-spacing: 0.02em;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
+
+/* Figure Styles for Blog Posts */
+.figure-container {
+    margin: 2rem 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.blog-figure {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.figure-caption {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.figure-citation {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.figure-citation a {
+    color: #00ff00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.figure-citation a:hover {
+    color: #00cc00;
+    text-decoration: underline;
+}
+
+/* List Styles for Blog Posts */
+.blog-content ul {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+    color: #e9ecef;
+}
+
+.blog-content li strong {
+    color: #ffffff;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}

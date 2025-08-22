@@ -1,6 +1,74 @@
 {
   "posts": [
     {
+      "id": "llm-power-rec",
+      "title": "Personal Survey on LLM Power Rec",
+      "date": "2025-08-22",
+      "shortDate": "August 22, 2025",
+      "intro": "A quick look at the three main ways LLMs are used in recommendation today. This survey explores how large language models are transforming recommendation systems through reranking, feature extraction, and explanation generation.",
+      "content": [
+        {
+          "type": "category",
+          "title": "LLM-enhanced rerank",
+          "description": "First get a small list with CF, then ask an LLM to reorder using the user's request and item text. Good for tricky asks like \"cozy sci-fi under 2 hours.\""
+        },
+        {
+          "type": "category",
+          "title": "LLM as features",
+          "description": "Let the LLM read text and output signals (e.g., \"family-friendly = yes/no\"). A smaller model uses these to rank items."
+        },
+        {
+          "type": "category",
+          "title": "RAG for explanation",
+          "description": "Retrieve snippets from item pages or reviews, and have the LLM write short reasons. Ranking stays classic—the LLM just explains."
+        },
+        {
+          "type": "rerank",
+          "title": "Rerank",
+          "description": "A two-pass setup: shortlist first, then reorder smartly.",
+          "figure": "Figures/Blog - 20250822.png",
+          "citation": "https://arxiv.org/abs/2504.07439?utm_source=chatgpt.com",
+          "steps": [
+            "First pass (candidate list): Use a fast ranking model (e.g., GMF/CF) with user info and the whole item set to get N candidates.",
+            "Second pass (reranking): Feed that shortlist plus user info into a reranker (LLM or small model). It re-scores, reorders, and may drop items.",
+            "Final result: Output the top K items (K ≤ N) as the recommendations, optionally with reasons."
+          ]
+        },
+        {
+          "type": "advanced",
+          "title": "Advanced Work",
+          "papers": [
+            {
+              "title": "LLM4Rerank (2024/25)",
+              "description": "Multi-objective reranking with structured prompts for accuracy, diversity, fairness — rec-specific, not just IR.",
+              "link": "https://arxiv.org/abs/2406.12433?utm_source=chatgpt.com"
+            },
+            {
+              "title": "Prompt-Based LLMs for Position-Bias-Aware Reranking (2025)",
+              "description": "Tests prompt tricks on MovieLens-100K; finds LLM rerank doesn't always beat strong baselines.",
+              "link": "https://arxiv.org/abs/2505.04948?utm_source=chatgpt.com"
+            },
+            {
+              "title": "LLM4Ranking (2025)",
+              "description": "A standardized framework for LLM reranking pipelines and evaluation — aimed at practical tooling.",
+              "link": "https://arxiv.org/abs/2504.07439?utm_source=chatgpt.com"
+            },
+            {
+              "title": "CORANK (2025)",
+              "description": "Compresses doc info into compact features so LLM rerank is cheaper and faster. Efficiency first.",
+              "link": "https://arxiv.org/pdf/2505.13757?utm_source=chatgpt.com"
+            },
+            {
+              "title": "Adaptive Repetition for Position Bias (2025)",
+              "description": "Uses repeated listwise prompts with dynamic early-stopping to reduce per-query bias.",
+              "link": "https://arxiv.org/abs/2507.17788?utm_source=chatgpt.com"
+            }
+          ]
+        }
+      ],
+      "conclusion": "LLMs are reshaping recommendation systems through three main approaches: intelligent reranking, semantic feature extraction, and natural language explanations. While the field is rapidly evolving with new papers addressing efficiency, bias, and practical deployment, the core challenge remains balancing the power of LLMs with the computational and cost constraints of real-world systems."
+    },
+    {
       "id": "privacy-rag",
       "title": "Privacy in RAG: Risks and Fixes Along the Pipeline",
       "date": "2025-08-19",
